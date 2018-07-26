@@ -1,0 +1,23 @@
+{
+    "name": "21six/ordu",
+    "description": "Command package for 21six projects",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Neil Sweeney",
+            "email": "neil.sweeney@21six.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "TwentyOneSix\\Ordu\\": "src"
+        }
+    },
+    "minimum-stability": "stable",
+    "require": {
+        "symfony/console": "~4.0",
+        "symfony/process": "~4.0"
+    },
+    "bin": "ordu"
+}
