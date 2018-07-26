@@ -1,6 +1,6 @@
 # Ordú
 
-Ordú is a command package for 21six project to setup boilerplates for projects.
+A command package to setup projects using boilerplates and custom configs
 
 ## Setup
 TODO
