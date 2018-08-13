@@ -16,6 +16,8 @@ abstract class Doggo extends Command
 
     protected $rootPath = '';
 
+    protected $timeout = 300;
+
     protected function configure()
     {
         $this
@@ -97,9 +99,11 @@ abstract class Doggo extends Command
 
     protected function runCommand(string $command)
     {
-        // print when in debug mode -vvv
         $this->output->writeln('<comment>' . $command . '</comment>', OutputInterface::VERBOSITY_DEBUG);
+
         $process = new Process($command);
+        $process->setTimeout($this->timeout);
+
         return $process->mustRun();
     }
 
@@ -151,7 +155,7 @@ abstract class Doggo extends Command
         }
         $this->runCommand(
             'cd ' . escapeshellarg($path) . ' && ' .
-            'composer require ' . $package
+            ' composer require ' . $package
         );
     }
 

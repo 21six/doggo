@@ -2,8 +2,6 @@
 <?php
 use Symfony\Component\Console\Application;
 
-set_time_limit(600);
-
 if (file_exists(__DIR__ . '/../../autoload.php')) {
     require __DIR__ . '/../../autoload.php';
 } else {
