@@ -68,6 +68,11 @@ class WordPress extends Doggo
         $this->composerInstallDependencies();
         $this->composerRunScript('new-project');
 
+        $this->makeFileFromStub(
+            '.htaccess.stub',
+            $this->projectPath . '/.htaccess'
+        );
+
         $this->updateFileContents(
             $this->projectPath . '/.env',
             [
