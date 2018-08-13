@@ -1,13 +1,13 @@
 <?php
 
-namespace TwentyOneSix\Ordu;
+namespace TwentyOneSix\Doggo;
 
 use Symfony\Component\Process\Process;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-abstract class Ordu extends Command
+abstract class Doggo extends Command
 {
     protected $input;
     protected $output;
@@ -37,7 +37,10 @@ abstract class Ordu extends Command
     {
         $this->input = $input;
         $this->output = $output;
-        $this->currentDirectory = getcwd() . '/test';
+        $this->currentDirectory = getcwd() ;
+        if (file_exists('.test')) {
+            $this->currentDirectory .= '/test';
+        }
         $this->handle();
     }
 

@@ -1,9 +1,15 @@
-# Ordú
+# Doggo
 
-A command package to setup projects using boilerplates and custom configs
+An obedient command package to setup projects using the best boilerplates and
+good custom configs
 
 ## Setup
-TODO
+
+1. Install [Composer][1] globally
+2. Run `composer global require "21six/doggo"`
 
 ## Commands
-TODO
+
+To see all avaliable commands run `doggo list`
+
+[1]: https://getcomposer.org/

@@ -1,12 +1,12 @@
 <?php
 
-namespace TwentyOneSix\Ordu\Installer;
+namespace TwentyOneSix\Doggo\Installer;
 
-use TwentyOneSix\Ordu\Ordu;
+use TwentyOneSix\Doggo\Doggo;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
-class WordPress extends Ordu
+class WordPress extends Doggo
 {
     protected $command = 'wordpress';
     protected $description = 'Creates a new WordPress site.';

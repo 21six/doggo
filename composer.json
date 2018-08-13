@@ -1,6 +1,6 @@
 {
-    "name": "21six/ordu",
-    "description": "Command package for 21six projects",
+    "name": "21six/doggo",
+    "description": "An obedient command package for 21six projects",
     "type": "project",
     "license": "MIT",
     "authors": [
@@ -11,7 +11,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "TwentyOneSix\\Ordu\\": "src"
+            "TwentyOneSix\\Doggo\\": "src"
         }
     },
     "minimum-stability": "stable",
@@ -19,5 +19,7 @@
         "symfony/console": "~4.0",
         "symfony/process": "~4.0"
     },
-    "bin": "ordu"
+    "bin": [
+        "doggo"
+    ]
 }

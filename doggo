@@ -4,8 +4,8 @@ use Symfony\Component\Console\Application;
 
 require __DIR__.'/vendor/autoload.php';
 
-$app = new Application('Ordú');
+$app = new Application('Doggo');
 
-$app->add(new TwentyOneSix\Ordu\Installer\WordPress);
+$app->add(new TwentyOneSix\Doggo\Installer\WordPress);
 
 $app->run();
