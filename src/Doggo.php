@@ -14,6 +14,8 @@ abstract class Doggo extends Command
 
     protected $help = '';
 
+    protected $rootPath = '';
+
     protected function configure()
     {
         $this
@@ -81,10 +83,14 @@ abstract class Doggo extends Command
         $this->write('<error>' . $text . '</error>');
     }
 
-    protected function gitClone(string $gitRepo, string $path)
+    protected function gitClone(string $gitRepo, string $path = '')
     {
+        if (! $path) {
+            $path = $this->rootPath;
+        }
+
         $this->runCommands([
-            'git clone ' . escapeshellarg($gitRepo) . ' ' . escapeshellarg($path),
+            'git clone --depth=1 ' . escapeshellarg($gitRepo) . ' ' . escapeshellarg($path),
             'rm -rf ' . escapeshellarg($path . '/.git'),
         ]);
     }
@@ -116,13 +122,88 @@ abstract class Doggo extends Command
         }
     }
 
-    protected function installComposerDependencies(string $path)
+    protected function composerInstallDependencies(string $path = '')
     {
+        if (! $path) {
+            $path = $this->rootPath;
+        }
         $this->output->writeln('<info>Installing Composer Dependencies</info>');
-        $commands = [
-            'cd ' . escapeshellarg($path),
-            'composer install',
-        ];
-        $this->runCommands($commands);
+        $this->runCommand(
+            'cd ' . escapeshellarg($path) . ' && ' .
+            'composer install'
+        );
+    }
+
+    protected function composerRequirePackages(array $packages, string $path = '')
+    {
+        if (! $path) {
+            $path = $this->rootPath;
+        }
+        foreach ($packages as $package) {
+            $this->composerRequirePackage($package, $path);
+        }
+    }
+
+    protected function composerRequirePackage(string $package, string $path = '')
+    {
+        if (! $path) {
+            $path = $this->rootPath;
+        }
+        $this->runCommand(
+            'cd ' . escapeshellarg($path) . ' && ' .
+            'composer require ' . $package
+        );
+    }
+
+    protected function composerRunScript(string $scriptName, string $path = '')
+    {
+        if (! $path) {
+            $path = $this->rootPath;
+        }
+        $this->runCommand(
+            'cd ' . escapeshellarg($path) . ' && ' .
+            'composer ' . $scriptName
+        );
+    }
+
+    protected function makeFileFromStub(string $fileName, string $createPath, array $replacements = [])
+    {
+        $stub = file_get_contents(__DIR__ . '/stubs/' . $fileName);
+
+        foreach ($replacements as $find => $replace) {
+            $stub = str_replace($find, $replace, $stub);
+        }
+
+        $directory = dirname($createPath);
+
+        if (!is_dir($directory)) {
+            mkdir($directory, 0754, true);
+        }
+
+        file_put_contents($createPath, $stub);
+    }
+
+    protected function updateFileContents(string $filePathAndName, array $replacements)
+    {
+        $contents = file_get_contents($filePathAndName);
+
+        foreach ($replacements as $find => $replace) {
+            $contents = str_replace($find, $replace, $contents);
+        }
+
+        file_put_contents($filePathAndName, $contents);
+    }
+
+    protected function makeRandomString(int $length = 64): string
+    {
+        $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_[]{}<>~`+=,.;:/?|';
+        $size = strlen($characters);
+        $key = '';
+
+        for ($i = 0; $i < $length; $i++) {
+            $key .= $characters[rand(0, $size - 1)];
+        }
+
+        return $key;
     }
 }

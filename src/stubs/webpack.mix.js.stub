@@ -1,0 +1,13 @@
+const mix = require('laravel-mix');
+
+const sassOptions = {
+    includePaths: [
+        'node_modules',
+    ],
+};
+
+mix
+    .js('public/themes/app/assets/js/app.js', 'public/assets/js', )
+    .sass('public/themes/app/assets/sass/app.scss', 'public/assets/css', sassOptions)
+    .sourceMaps()
+;
