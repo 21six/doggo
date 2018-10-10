@@ -64,7 +64,7 @@ class WordPress extends Doggo
 
     protected function install()
     {
-        $this->gitClone('git@github.com:wolfiezero/wordpress.git');
+        $this->gitClone('git@github.com:21six/wordpress.git');
         $this->composerInstallDependencies();
         $this->composerRunScript('new-project');
 
